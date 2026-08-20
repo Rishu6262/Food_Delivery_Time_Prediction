@@ -126,7 +126,7 @@ st.markdown(
 # API_URL = "http://127.0.0.1:8000"
 
 # Render deployment:
-# API_URL = "https://your-fastapi-app.onrender.com"
+# API_URL = food-delivery-time-prediction-lilac.vercel.app
 
 API_URL = st.secrets.get(
     "API_URL",
