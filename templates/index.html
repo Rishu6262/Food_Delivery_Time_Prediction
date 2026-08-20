@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DeliverIQ — Food Delivery Predictor</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+</head>
+
+
+<body>
+
+    <!-- Background -->
+    <div class="background-grid"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+
+        <div class="brand">
+            <div class="brand-icon">D</div>
+
+            <div>
+                <h2>DeliverIQ</h2>
+                <span>ML Delivery Intelligence</span>
+            </div>
+        </div>
+
+        <div class="status">
+            <span class="status-dot"></span>
+            API Online
+        </div>
+
+    </nav>
+
+
+    <!-- Main -->
+    <main class="container">
+
+        <!-- Hero -->
+        <section class="hero">
+
+            <div class="hero-badge">
+                <span>✦</span>
+                AI-POWERED PREDICTION
+            </div>
+
+            <h1>
+                Predict delivery time
+                <span>before it arrives.</span>
+            </h1>
+
+            <p>
+                Enter order, rider, restaurant, traffic and route
+                information. Our machine learning pipeline estimates
+                the delivery time in minutes.
+            </p>
+
+        </section>
+
+
+        <!-- Dashboard -->
+        <section class="dashboard">
+
+            <!-- Form Card -->
+            <div class="card form-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <span class="eyebrow">PREDICTION INPUT</span>
+                        <h2>Order Details</h2>
+                    </div>
+
+                    <div class="step-indicator">
+                        01 / 01
+                    </div>
+
+                </div>
+
+
+                <form id="predictionForm">
+
+                    <!-- Order -->
+                    <div class="section-title">
+                        <span>01</span>
+                        Order Information
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label>Order Hour</label>
+                            <input
+                                type="number"
+                                id="Order_Hour"
+                                min="0"
+                                max="23"
+                                value="18"
+                                required
+                            >
+                            <small>0 - 23</small>
+                        </div>
+
+                        <div class="field">
+                            <label>Day of Week</label>
+
+                            <select id="Day_of_Week">
+                                <option>Monday</option>
+                                <option>Tuesday</option>
+                                <option>Wednesday</option>
+                                <option>Thursday</option>
+                                <option selected>Friday</option>
+                                <option>Saturday</option>
+                                <option>Sunday</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Weekend</label>
+
+                            <select id="Is_Weekend">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Festival</label>
+
+                            <select id="Is_Festival">
+                                <option value="0">No</option>
+                                <option value="1">Yes</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Order Items</label>
+
+                            <input
+                                type="number"
+                                id="Order_Items"
+                                min="1"
+                                value="3"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label>Priority</label>
+
+                            <select id="Delivery_Priority">
+                                <option>Low</option>
+                                <option selected>Medium</option>
+                                <option>High</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Location -->
+                    <div class="section-title">
+                        <span>02</span>
+                        Route & Location
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label>Pickup Zone</label>
+
+                            <select id="Pickup_Zone">
+                                <option>Residential</option>
+                                <option selected>CBD</option>
+                                <option>Commercial</option>
+                                <option>Industrial</option>
+                                <option>Suburban</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Dropoff Zone</label>
+
+                            <select id="Dropoff_Zone">
+                                <option selected>Residential</option>
+                                <option>CBD</option>
+                                <option>Commercial</option>
+                                <option>Industrial</option>
+                                <option>Suburban</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Road Distance</label>
+
+                            <div class="input-unit">
+                                <input
+                                    type="number"
+                                    id="Road_Distance_km"
+                                    step="0.1"
+                                    min="0"
+                                    value="20"
+                                    required
+                                >
+                                <span>km</span>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>Distance Category</label>
+
+                            <select id="Delivery_Distance_Category">
+                                <option>Short</option>
+                                <option>Medium</option>
+                                <option selected>Long</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Traffic Level</label>
+
+                            <select id="Traffic_Level">
+                                <option>Low</option>
+                                <option>Moderate</option>
+                                <option selected>High</option>
+                                <option>Severe</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Number of Signals</label>
+
+                            <input
+                                type="number"
+                                id="Number_of_Signals"
+                                min="0"
+                                value="10"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <!-- Environment -->
+                    <div class="section-title">
+                        <span>03</span>
+                        Environment
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label>Weather</label>
+
+                            <select id="Weather">
+                                <option selected>Clear</option>
+                                <option>Cloudy</option>
+                                <option>Rain</option>
+                                <option>Fog</option>
+                                <option>Storm</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Vehicle Type</label>
+
+                            <select id="Vehicle_Type">
+                                <option selected>Bike</option>
+                                <option>Scooter</option>
+                                <option>Electric Scooter</option>
+                                <option>Bicycle</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Average Speed</label>
+
+                            <div class="input-unit">
+                                <input
+                                    type="number"
+                                    id="Average_Speed_kmph"
+                                    step="0.1"
+                                    min="0.1"
+                                    value="30"
+                                    required
+                                >
+                                <span>km/h</span>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>Restaurant Load</label>
+
+                            <select id="Restaurant_Load">
+                                <option>Low</option>
+                                <option selected>Medium</option>
+                                <option>High</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Restaurant & Rider -->
+                    <div class="section-title">
+                        <span>04</span>
+                        Rider & Restaurant
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label>Rider Experience</label>
+
+                            <div class="input-unit">
+                                <input
+                                    type="number"
+                                    id="Rider_Experience_Years"
+                                    step="0.1"
+                                    min="0"
+                                    value="4.5"
+                                    required
+                                >
+                                <span>years</span>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>Rider Rating</label>
+
+                            <input
+                                type="number"
+                                id="Rider_Rating"
+                                step="0.1"
+                                min="0"
+                                max="5"
+                                value="4.2"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label>Restaurant Rating</label>
+
+                            <input
+                                type="number"
+                                id="Restaurant_Rating"
+                                step="0.1"
+                                min="0"
+                                max="5"
+                                value="4.3"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label>Cuisine</label>
+
+                            <select id="Cuisine_Type">
+                                <option selected>Pizza</option>
+                                <option>Biryani</option>
+                                <option>Chinese</option>
+                                <option>Burger</option>
+                                <option>North Indian</option>
+                                <option>South Indian</option>
+                                <option>Cafe</option>
+                                <option>Bakery</option>
+                                <option>Desserts</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Preparation Time</label>
+
+                            <div class="input-unit">
+                                <input
+                                    type="number"
+                                    id="Preparation_Time_Min"
+                                    min="0"
+                                    value="25"
+                                    required
+                                >
+                                <span>min</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Date -->
+                    <div class="section-title">
+                        <span>05</span>
+                        Date
+                    </div>
+
+                    <div class="form-grid">
+
+                        <div class="field">
+                            <label>Year</label>
+
+                            <input
+                                type="number"
+                                id="Order_Year"
+                                value="2025"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label>Month</label>
+
+                            <input
+                                type="number"
+                                id="Order_Month"
+                                min="1"
+                                max="12"
+                                value="8"
+                                required
+                            >
+                        </div>
+
+                        <div class="field">
+                            <label>Day</label>
+
+                            <input
+                                type="number"
+                                id="Order_Day"
+                                min="1"
+                                max="31"
+                                value="17"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="predict-btn"
+                        id="predictBtn"
+                    >
+                        <span class="btn-text">
+                            Predict Delivery Time
+                        </span>
+
+                        <span class="btn-arrow">→</span>
+
+                        <span
+                            class="loader"
+                            id="loader"
+                        ></span>
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- Result -->
+            <aside class="result-card">
+
+                <div class="result-top">
+
+                    <span class="eyebrow">
+                        PREDICTION RESULT
+                    </span>
+
+                    <div class="live-badge">
+                        <span></span>
+                        LIVE
+                    </div>
+
+                </div>
+
+
+                <div class="result-content">
+
+                    <div class="route-animation">
+
+                        <div class="route-point restaurant">
+                            <span>R</span>
+                        </div>
+
+                        <div class="route-line">
+                            <div class="route-dot"></div>
+                            <div class="route-dot"></div>
+                            <div class="route-dot"></div>
+                        </div>
+
+                        <div class="route-point customer">
+                            <span>⌖</span>
+                        </div>
+
+                    </div>
+
+
+                    <p class="result-label">
+                        Estimated delivery time
+                    </p>
+
+                    <div class="prediction-number">
+
+                        <span id="predictionValue">
+                            --
+                        </span>
+
+                        <small>min</small>
+
+                    </div>
+
+                    <p
+                        class="prediction-message"
+                        id="predictionMessage"
+                    >
+                        Fill in the order details and
+                        run a prediction.
+                    </p>
+
+
+                    <div class="result-stats">
+
+                        <div>
+                            <span>MODEL</span>
+                            <strong>ML Pipeline</strong>
+                        </div>
+
+                        <div>
+                            <span>API</span>
+                            <strong>FastAPI</strong>
+                        </div>
+
+                        <div>
+                            <span>STATUS</span>
+                            <strong id="apiStatus">
+                                Ready
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="result-footer">
+                    Prediction generated by your trained
+                    regression pipeline.
+                </div>
+
+            </aside>
+
+        </section>
+
+
+        <footer>
+            <span>DeliverIQ</span>
+            <span>Food Delivery Intelligence System</span>
+            <span>FastAPI × Machine Learning</span>
+        </footer>
+
+    </main>
+
+
+    <script src="/static/script.js"></script>
+
+</body>
+
+</html>
