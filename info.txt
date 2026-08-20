@@ -1,0 +1,3 @@
+python -m uvicorn app:app --reload
+cd F:\fastapi_learn\food_time_pred 
+deactivate                        
